@@ -45,14 +45,15 @@ class Product(models.Model):
         whatsapp_message = (
             f"🔍 Found Item Alert!\n\n"
             f"Item: {self.name}\n"
-            f"Location: {self.location}\n\n"
+            # f"Location: {self.location}\n\n"
             f"Visit to claim: {product_url}\n\n"
             f"#KampusHaven #LostAndFound"
         )
         
         # Twitter message (shorter due to character limit)
         twitter_message = (
-            f"📢 Found: {self.name} at {self.location}\n"
+            f"🔍 Found Item Alert!\n\n"
+            f"Item: {self.name}\n"
             f"Claim here 👉 {product_url}\n"
             f"#KampusHaven #LostAndFound"
         )
