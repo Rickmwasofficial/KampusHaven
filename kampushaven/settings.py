@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-1_m1o*!!%ud-66j#m74ru4g392xm%*4a!2v-5=x#zm9fde+r(g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['maverick-blogs.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['kampushaven.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
