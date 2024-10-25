@@ -40,8 +40,25 @@ class Product(models.Model):
     def get_share_links(self):
         """Generate sharing links for different platforms"""
         product_url = f"https://kampushaven.onrender.com{self.get_absolute_url()}"
+        
+        # WhatsApp message
+        whatsapp_message = (
+            f"🔍 Found Item Alert!\n\n"
+            f"Item: {self.name}\n"
+            f"Location: {self.location}\n\n"
+            f"Visit to claim: {product_url}\n\n"
+            f"#KampusHaven #LostAndFound"
+        )
+        
+        # Twitter message (shorter due to character limit)
+        twitter_message = (
+            f"📢 Found: {self.name} at {self.location}\n"
+            f"Claim here 👉 {product_url}\n"
+            f"#KampusHaven #LostAndFound"
+        )
+    
         return {
-            'whatsapp': f"https://api.whatsapp.com/send?text={self.name} - {product_url}",
+            'whatsapp': f"https://api.whatsapp.com/send?text={quote(whatsapp_message)}",
             'facebook': f"https://www.facebook.com/sharer/sharer.php?u={product_url}",
-            'twitter': f"https://twitter.com/intent/tweet?text={self.name}&url={product_url}"
+            'twitter': f"https://twitter.com/intent/tweet?text={quote(twitter_message)}"
         }
