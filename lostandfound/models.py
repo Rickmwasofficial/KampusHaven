@@ -39,7 +39,7 @@ class Product(models.Model):
 
     def get_share_links(self):
         """Generate sharing links for different platforms"""
-        product_url = f"http://localhost:8000{self.get_absolute_url()}"
+        product_url = f"https://kampushaven.onrender.com{self.get_absolute_url()}"
         return {
             'whatsapp': f"https://api.whatsapp.com/send?text={self.name} - {product_url}",
             'facebook': f"https://www.facebook.com/sharer/sharer.php?u={product_url}",
