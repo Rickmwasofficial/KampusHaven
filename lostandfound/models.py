@@ -11,6 +11,7 @@ class Product(models.Model):
     posted_on = models.DateTimeField(auto_now_add=True)
     finder_no = models.CharField(max_length=10)
     finder_email = models.EmailField()
+    location = models.CharField(max_length=100)
     state = models.BooleanField(default=False)
     slug = models.SlugField(unique=True, blank=True)
     image = models.ImageField(upload_to='products/') 

@@ -1,38 +1,163 @@
-<div class="container mt-4">
-    <h2>Create New Product</h2>
-    
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+</head>
+
+<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+
+    <div class="flex items-center justify-center p-12">
+        <div class="mx-auto w-full max-w-[550px] bg-white">
+            <form class="py-6 px-9" method="POST" enctype="multipart/form-data" action="{% url 'create_product' %}">
+                {% csrf_token %}
+
+                <div class="mb-5">
+                    <label for="{{ form.name.id_for_label }}" class="mb-3 block text-base font-medium text-[#07074D]">
+                        Item Name
+                    </label>
+                    {{ form.name }}
+                </div>
+
+                <div class="mb-5">
+                    <label for="{{ form.place_found.id_for_label }}"
+                        class="mb-3 block text-base font-medium text-[#07074D]">
+                        Place Found
+                    </label>
+                    {{ form.location }}
+                </div>
+
+                <div class="mb-5">
+                    <label for="{{ form.description.id_for_label }}"
+                        class="mb-3 block text-base font-medium text-[#07074D]">
+                        Description
+                    </label>
+                    {{ form.description }}
+                </div>
+
+                <div class="mb-5">
+                    <label for="{{ form.finder_no.id_for_label }}"
+                        class="mb-3 block text-base font-medium text-[#07074D]">
+                        Your Contact Number
+                    </label>
+                    {{ form.finder_no }}
+                </div>
+
+                <div class="mb-5">
+                    <label for="{{ form.finder_email.id_for_label }}"
+                        class="mb-3 block text-base font-medium text-[#07074D]">
+                        Your Email
+                    </label>
+                    {{ form.finder_email }}
+                </div>
+
+                <div class="mb-6 pt-4">
+                    <label class="mb-5 block text-xl font-semibold text-[#07074D]">
+                        Upload Item Image
+                    </label>
+
+                    <section class="container w-full mx-auto items-center py-32">
+                        <div class="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden items-center">
+                          <div class="px-4 py-6">
+                            <div id="image-preview" class="max-w-sm p-6 mb-4 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer">
+                                {{ form.image }}
+                              <label for="upload" class="cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-700 mx-auto mb-4">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                </svg>
+                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-700">Upload picture</h5>
+                                <p class="font-normal text-sm text-gray-400 md:px-6">Choose photo size should be less than <b class="text-gray-600">2mb</b></p>
+                                <p class="font-normal text-sm text-gray-400 md:px-6">and should be in <b class="text-gray-600">JPG, PNG, or GIF</b> format.</p>
+                                <span id="filename" class="text-gray-500 bg-gray-200 z-50"></span>
+                              </label>
+                            </div>
+                            <div class="flex items-center justify-center">
+                              <div class="w-full">
+                                <label class="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center mr-2 mb-2 cursor-pointer">
+                                  <span class="text-center ml-2">Upload</span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        Submit Found Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- JavaScript for handling image preview -->
+    <script>
+        const uploadInput = document.getElementById('upload');
+        const filenameLabel = document.getElementById('filename');
+        const imagePreview = document.getElementById('image-preview');
+
+        // Check if the event listener has been added before
+        let isEventListenerAdded = false;
+
+        uploadInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+
+            if (file) {
+            filenameLabel.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.innerHTML =
+                `<img src="${e.target.result}" class="max-h-48 rounded-lg mx-auto" alt="Image preview" />`;
+                imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+                // Add event listener for image preview only once
+                if (!isEventListenerAdded) {
+                imagePreview.addEventListener('click', () => {
+                    uploadInput.click();
+                });
+
+                isEventListenerAdded = true;
+                }
+            };
+            reader.readAsDataURL(file);
+            } else {
+            filenameLabel.textContent = '';
+            imagePreview.innerHTML =
+                `<div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-500">No image preview</div>`;
+            imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
+
+            // Remove the event listener when there's no image
+            imagePreview.removeEventListener('click', () => {
+                uploadInput.click();
+            });
+
+            isEventListenerAdded = false;
+            }
+        });
+
+        uploadInput.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    </script>
+
     {% if messages %}
-    <div class="messages">
+    <div class="fixed top-4 right-4">
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
             {{ message }}
         </div>
         {% endfor %}
     </div>
     {% endif %}
-    
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        
-        {% for field in form %}
-        <div class="mb-3">
-            <label for="{{ field.id_for_label }}" class="form-label">
-                {{ field.label }}
-            </label>
-            {{ field }}
-            {% if field.errors %}
-            <div class="alert alert-danger mt-1">
-                {{ field.errors }}
-            </div>
-            {% endif %}
-            {% if field.help_text %}
-            <div class="form-text">
-                {{ field.help_text }}
-            </div>
-            {% endif %}
-        </div>
-        {% endfor %}
-        
-        <button type="submit" class="btn btn-primary">Create Product</button>
-    </form>
-</div>
+</body>
+
+</html>
