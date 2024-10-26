@@ -7,44 +7,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link href="https://cdn.tailwindcss.com" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
-	
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'undraw_true_friends_c-94-g.svg' %}" type="image/x-icon">
     <style>
         .work-sans {
             font-family: 'Work Sans', sans-serif;
         }
-                
-        #menu-toggle:checked + #menu {
+
+        #menu-toggle:checked+#menu {
             display: block;
         }
-        
+
         .hover\:grow {
             transition: all 0.3s;
             transform: scale(1);
         }
-        
+
         .hover\:grow:hover {
             transform: scale(1.02);
         }
-        
-        .carousel-open:checked + .carousel-item {
+
+        .carousel-open:checked+.carousel-item {
             position: static;
             opacity: 100;
         }
-        
+
         .carousel-item {
             -webkit-transition: opacity 0.6s ease-out;
             transition: opacity 0.6s ease-out;
         }
-        
-        #carousel-1:checked ~ .control-1,
-        #carousel-2:checked ~ .control-2,
-        #carousel-3:checked ~ .control-3 {
+
+        #carousel-1:checked~.control-1,
+        #carousel-2:checked~.control-2,
+        #carousel-3:checked~.control-3 {
             display: block;
         }
-        
+
         .carousel-indicators {
             list-style: none;
             margin: 0;
@@ -56,10 +56,10 @@
             text-align: center;
             z-index: 10;
         }
-        
-        #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-        #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-        #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+
+        #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
             color: #000;
             /*Set to match the Tailwind colour you want the active one to be */
         }
@@ -74,7 +74,8 @@
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    viewBox="0 0 20 20">
                     <title>menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
@@ -84,26 +85,30 @@
             <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
                 <nav>
                     <ul class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                        <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="#">Contact</a></li>
-                        <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4" href="#">About</a></li>
+                        <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4"
+                                href="#">Contact</a></li>
+                        <li><a class="inline-block no-underline hover:text-black hover:underline py-2 px-4"
+                                href="#">About</a></li>
                     </ul>
                 </nav>
             </div>
 
             <div class="order-1 md:order-2">
-                <a class="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
-                    <img src="{% static 'undraw_true_friends_c-94-g.svg' %}" class="mr-2" width="34" height="25" alt="" srcset="">
+                <a class="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
+                    href="#">
+                    <img src="{% static 'undraw_true_friends_c-94-g.svg' %}" class="mr-2" width="34" height="25" alt=""
+                        srcset="">
                     KAMPUS HAVEN
                 </a>
             </div>
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
-                
+
             </div>
         </div>
     </nav>
 
-    <div class="flex items-center justify-center p-12">
+    <div class="flex w-full items-center justify-center p-12">
         <div class="mx-auto w-full max-w-[550px] bg-white">
             <form class="py-6 px-9" method="POST" enctype="multipart/form-data" action="{% url 'create_product' %}">
                 {% csrf_token %}
@@ -154,38 +159,47 @@
 
                     <section class="container w-full mx-auto items-center py-32">
                         <div class="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden items-center">
-                          <div class="px-4 py-6">
-                            <div id="image-preview" class="max-w-sm p-6 mb-4 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer">
-                                {{ form.image }}
-                              <label for="upload" class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-700 mx-auto mb-4">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                                </svg>
-                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-700">Upload picture</h5>
-                                <p class="font-normal text-sm text-gray-400 md:px-6">Choose photo size should be less than <b class="text-gray-600">2mb</b></p>
-                                <p class="font-normal text-sm text-gray-400 md:px-6">and should be in <b class="text-gray-600">JPG, PNG, or GIF</b> format.</p>
-                                <span id="filename" class="text-gray-500 bg-gray-200 z-50"></span>
-                              </label>
+                            <div class="px-4 py-6">
+                                <div id="image-preview"
+                                    class="max-w-sm p-6 mb-4 bg-gray-100 border-dashed border-2 border-gray-400 rounded-lg items-center mx-auto text-center cursor-pointer">
+                                    {{ form.image }}
+                                    <label for="upload" class="cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-8 h-8 text-gray-700 mx-auto mb-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                        </svg>
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-700">Upload picture
+                                        </h5>
+                                        <p class="font-normal text-sm text-gray-400 md:px-6">Choose photo size should be
+                                            less than <b class="text-gray-600">2mb</b></p>
+                                        <p class="font-normal text-sm text-gray-400 md:px-6">and should be in <b
+                                                class="text-gray-600">JPG, PNG, or GIF</b> format.</p>
+                                        <span id="filename" class="text-gray-500 bg-gray-200 z-50"></span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-center">
+                                    <div class="w-full">
+                                        <label
+                                            class="w-full text-dark bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center mr-2 mb-2 cursor-pointer">
+                                            <span class="text-center ml-2">Upload</span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex items-center justify-center">
-                              <div class="w-full">
-                                <label class="w-full text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center mr-2 mb-2 cursor-pointer">
-                                  <span class="text-center ml-2">Upload</span>
-                                </label>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </section>
-                      
+                    </section>
+                    <div>
+                        <button type="submit"
+                            class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                            Submit Found Item
+                        </button>
+                    </div>
+
                 </div>
 
-                <div>
-                    <button type="submit"
-                        class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                        Submit Found Item
-                    </button>
-                </div>
+
             </form>
         </div>
     </div>
@@ -204,36 +218,36 @@
             const file = event.target.files[0];
 
             if (file) {
-            filenameLabel.textContent = file.name;
+                filenameLabel.textContent = file.name;
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.innerHTML =
+                        `<img src="${e.target.result}" class="max-h-48 rounded-lg mx-auto" alt="Image preview" />`;
+                    imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+                    // Add event listener for image preview only once
+                    if (!isEventListenerAdded) {
+                        imagePreview.addEventListener('click', () => {
+                            uploadInput.click();
+                        });
+
+                        isEventListenerAdded = true;
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                filenameLabel.textContent = '';
                 imagePreview.innerHTML =
-                `<img src="${e.target.result}" class="max-h-48 rounded-lg mx-auto" alt="Image preview" />`;
-                imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+                    `<div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-500">No image preview</div>`;
+                imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
 
-                // Add event listener for image preview only once
-                if (!isEventListenerAdded) {
-                imagePreview.addEventListener('click', () => {
+                // Remove the event listener when there's no image
+                imagePreview.removeEventListener('click', () => {
                     uploadInput.click();
                 });
 
-                isEventListenerAdded = true;
-                }
-            };
-            reader.readAsDataURL(file);
-            } else {
-            filenameLabel.textContent = '';
-            imagePreview.innerHTML =
-                `<div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-500">No image preview</div>`;
-            imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
-
-            // Remove the event listener when there's no image
-            imagePreview.removeEventListener('click', () => {
-                uploadInput.click();
-            });
-
-            isEventListenerAdded = false;
+                isEventListenerAdded = false;
             }
         });
 
